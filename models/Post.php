@@ -123,13 +123,13 @@ class Post extends Model
         });
     }
 
-//    public function beforeSave()
-//    {
-//        if (empty($this->author)) {
-//            $user = BackendAuth::getUser();
-//            if (!is_null($user)) {
-//                $this->user = $user->id;
-//            }
-//        }
-//    }
+    public function beforeSave()
+    {
+        if (empty($this->author)) {
+            $user = BackendAuth::getUser();
+            if (!is_null($user)) {
+                $this->user_id = $user->id;
+            }
+        }
+    }
 }
