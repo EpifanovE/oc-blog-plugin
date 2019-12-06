@@ -1,0 +1,14 @@
+name: PostsController
+modelClass: EEV\Blog\Models\Post
+form: $/eev/blog/models/post/fields.yaml
+defaultRedirect: eev/blog/postscontroller
+create:
+    title: 'eev.blog::lang.creating_post'
+    redirect: 'eev/blog/postscontroller/update/:id'
+    redirectClose: eev/blog/postscontroller
+update:
+    title: 'eev.blog::lang.updating_post'
+    redirect: eev/blog/postscontroller
+    redirectClose: eev/blog/postscontroller
+preview:
+    title: 'eev.blog::lang.preview_post'

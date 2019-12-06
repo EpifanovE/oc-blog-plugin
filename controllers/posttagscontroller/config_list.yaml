@@ -1,0 +1,12 @@
+list: $/eev/blog/models/posttag/columns.yaml
+modelClass: EEV\Blog\Models\PostTag
+title: PostTagsController
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+recordsPerPage: 20
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'eev/blog/posttagscontroller/update/:id'

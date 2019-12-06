@@ -1,0 +1,14 @@
+name: PostCategoriesController
+modelClass: EEV\Blog\Models\PostCategory
+form: $/eev/blog/models/postcategory/fields.yaml
+defaultRedirect: eev/blog/postcategoriescontroller
+create:
+    title: 'eev.blog::lang.creating'
+    redirect: 'eev/blog/postcategoriescontroller/update/:id'
+    redirectClose: eev/blog/postcategoriescontroller
+update:
+    title: 'eev.blog::lang.updating'
+    redirect: eev/blog/postcategoriescontroller
+    redirectClose: eev/blog/postcategoriescontroller
+preview:
+    title: 'eev.blog::lang.preview'

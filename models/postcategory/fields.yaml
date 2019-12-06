@@ -1,0 +1,75 @@
+tabs:
+    fields:
+        title:
+            label: 'eev.blog::lang.title'
+            span: full
+            type: text
+            tab: 'eev.blog::lang.general-params'
+        content:
+            label: 'eev.blog::lang.content'
+            size: giant
+            span: full
+            type: richeditor
+            tab: 'eev.blog::lang.general-params'
+        preview:
+            label: 'eev.blog::lang.preview'
+            size: small
+            span: full
+            type: richeditor
+            tab: 'eev.blog::lang.general-params'
+        created_at:
+            label: 'eev.blog::lang.created_at'
+            mode: datetime
+            span: auto
+            disabled: 1
+            readOnly: 1
+            type: datepicker
+            tab: 'eev.blog::lang.advanced'
+        updated_at:
+            label: 'eev.blog::lang.updated_at'
+            mode: datetime
+            span: auto
+            disabled: 1
+            readOnly: 1
+            type: datepicker
+            tab: 'eev.blog::lang.advanced'
+        image:
+            label: 'eev.blog::lang.image'
+            mode: image
+            span: auto
+            type: mediafinder
+            tab: 'eev.blog::lang.advanced'
+        status:
+            label: 'eev.blog::lang.status'
+            options:
+                active: 'eev.blog::lang.statuses.active'
+                draft: 'eev.blog::lang.statuses.draft'
+                disabled: 'eev.blog::lang.statuses.disabled'
+            showSearch: true
+            span: auto
+            type: dropdown
+            tab: 'eev.blog::lang.advanced'
+        slug:
+            label: 'eev.blog::lang.slug'
+            span: full
+            type: text
+            tab: 'eev.blog::lang.seo'
+        seo_title:
+            label: 'eev.blog::lang.seo_title'
+            span: full
+            type: text
+            comment: 'eev.blog::lang.in_title_tag'
+            tab: 'eev.blog::lang.seo'
+        seo_description:
+            label: 'eev.blog::lang.seo_description'
+            size: small
+            span: full
+            type: textarea
+            comment: 'eev.blog::lang.in_tag_description'
+            tab: 'eev.blog::lang.seo'
+        seo_keywords:
+            label: 'eev.blog::lang.seo_keywords'
+            span: full
+            type: text
+            comment: 'eev.blog::lang.in_tag_keywords'
+            tab: 'eev.blog::lang.seo'

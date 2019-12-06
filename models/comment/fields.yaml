@@ -1,0 +1,37 @@
+tabs:
+    fields:
+        content:
+            label: 'eev.blog::lang.content'
+            size: large
+            span: full
+            type: richeditor
+            tab: 'eev.blog::lang.general-params'
+        user:
+            label: 'eev.blog::lang.user'
+            nameFrom: user_name_email
+            descriptionFrom: description
+            span: auto
+            type: relation
+            tab: 'eev.blog::lang.general-params'
+            placeholder: 'eev.blog::lang.select-user'
+        admin:
+            label: 'eev.blog::lang.admin'
+            nameFrom: admin_name_email
+            descriptionFrom: description
+            span: auto
+            type: relation
+            tab: 'eev.blog::lang.general-params'
+            placeholder: 'eev.blog::lang.select-admin'
+        post:
+            label: 'eev.blog::lang.post'
+            nameFrom: title
+            descriptionFrom: preview
+            span: auto
+            type: relation
+            tab: 'eev.blog::lang.general-params'
+            placeholder: 'eev.blog::lang.select-post'
+        is_moderated:
+            label: 'eev.blog::lang.is_moderated'
+            span: auto
+            type: switch
+            tab: 'eev.blog::lang.general-params'

@@ -1,0 +1,14 @@
+name: PostTagsController
+modelClass: EEV\Blog\Models\PostTag
+form: $/eev/blog/models/posttag/fields.yaml
+defaultRedirect: eev/blog/posttagscontroller
+create:
+    title: 'eev.blog::lang.creating'
+    redirect: 'eev/blog/posttagscontroller/update/:id'
+    redirectClose: eev/blog/posttagscontroller
+update:
+    title: 'eev.blog::lang.updating'
+    redirect: eev/blog/posttagscontroller
+    redirectClose: eev/blog/posttagscontroller
+preview:
+    title: 'eev.blog::lang.preview'

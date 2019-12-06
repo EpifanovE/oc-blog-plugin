@@ -1,0 +1,5 @@
+title: 'eev.blog::lang.sorting'
+modelClass: EEV\Blog\Models\PostCategory
+nameFrom: title
+toolbar:
+    buttons: reorder_toolbar

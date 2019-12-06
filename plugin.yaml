@@ -1,0 +1,52 @@
+plugin:
+    name: 'eev.blog::lang.plugin.name'
+    description: 'eev.blog::lang.plugin.description'
+    author: 'Evgeny Epifanov'
+    icon: oc-icon-edit
+    homepage: 'https://eecode.ru'
+permissions:
+    eev.blog.settings:
+        tab: 'eev.blog::lang.blog'
+        label: 'eev.blog::lang.settings'
+    eev.blog.posts:
+        tab: 'eev.blog::lang.blog'
+        label: 'eev.blog::lang.posts'
+    eev.blog.categories:
+        tab: 'eev.blog::lang.blog'
+        label: 'eev.blog::lang.post-categories'
+    eev.blog.tags:
+        tab: 'eev.blog::lang.blog'
+        label: 'eev.blog::lang.post-tags'
+    eev.blog.comments:
+        tab: 'eev.blog::lang.blog'
+        label: 'eev.blog::lang.comments'
+navigation:
+    blog:
+        label: 'eev.blog::lang.blog'
+        url: eev/blog/postscontroller
+        icon: icon-edit
+        sideMenu:
+            posts:
+                label: 'eev.blog::lang.posts'
+                url: eev/blog/postscontroller
+                icon: icon-edit
+                permissions:
+                    - eev.blog.posts
+            categories:
+                label: 'eev.blog::lang.categories'
+                url: eev/blog/postcategoriescontroller
+                icon: icon-folder-open-o
+                permissions:
+                    - eev.blog.categories
+            tags:
+                label: 'eev.blog::lang.tags'
+                url: eev/blog/posttagscontroller
+                icon: icon-tags
+                permissions:
+                    - eev.blog.tags
+            comments:
+                label: 'eev.blog::lang.comments'
+                url: eev/blog/commentscontroller
+                icon: icon-comments-o
+                permissions:
+                    - eev.blog.comments

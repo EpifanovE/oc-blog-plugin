@@ -1,0 +1,28 @@
+# ===================================
+# Filter Scope Definitions
+# ===================================
+
+scopes:
+
+  categories:
+    label: 'eev.blog::lang.categories'
+    modelClass: EEV\Blog\Models\PostCategory
+    scope: filterByCategory
+    nameFrom: title
+    recordsToShow: 20
+
+  tags:
+    label: 'eev.blog::lang.tags'
+    modelClass: EEV\Blog\Models\PostTag
+    scope: filterByTag
+    nameFrom: title
+    recordsToShow: 20
+
+  statuses:
+    label: 'eev.blog::lang.status'
+    type: group
+    conditions: status in (:filtered)
+    options:
+      active: 'eev.blog::lang.statuses.active'
+      draft: 'eev.blog::lang.statuses.draft'
+      disabled: 'eev.blog::lang.statuses.disabled'

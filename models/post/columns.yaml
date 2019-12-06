@@ -1,0 +1,24 @@
+columns:
+    id:
+        label: ID
+        type: number
+        searchable: true
+        sortable: true
+    title:
+        label: 'eev.blog::lang.title'
+        type: text
+        searchable: true
+        sortable: true
+    preview:
+        label: 'eev.blog::lang.preview'
+        type: text
+        searchable: true
+        sortable: true
+    created_at:
+        label: 'eev.blog::lang.created_at'
+        type: datetime
+        sortable: true
+    updated_at:
+        label: 'eev.blog::lang.updated_at'
+        type: datetime
+        sortable: true

@@ -1,0 +1,32 @@
+tabs:
+  fields:
+    title:
+      label: 'eev.blog::lang.title'
+      span: full
+      type: text
+      tab: 'eev.blog::lang.general-params'
+    content:
+      label: 'eev.blog::lang.content'
+      size: giant
+      span: full
+      type: richeditor
+      tab: 'eev.blog::lang.general-params'
+    seo_title:
+      label: 'eev.blog::lang.seo_title'
+      span: full
+      type: text
+      comment: 'eev.blog::lang.in_title_tag'
+      tab: 'eev.blog::lang.seo'
+    seo_description:
+      label: 'eev.blog::lang.seo_description'
+      size: small
+      span: full
+      type: textarea
+      comment: 'eev.blog::lang.in_tag_description'
+      tab: 'eev.blog::lang.seo'
+    seo_keywords:
+      label: 'eev.blog::lang.seo_keywords'
+      span: full
+      type: text
+      comment: 'eev.blog::lang.in_tag_keywords'
+      tab: 'eev.blog::lang.seo'
