@@ -1,5 +1,7 @@
 <?php namespace EEV\Blog\Models;
 
+use Backend\Models\User;
+use BackendAuth;
 use Model;
 use October\Rain\Database\Traits\Sluggable;
 use October\Rain\Database\Traits\SoftDelete;
@@ -47,6 +49,7 @@ class Post extends Model
             'string',
             'nullable',
             'max:1024',
+            'regex:/^[a-z0-9\/\:_\-\*\[\]\+\?\|]*$/i', 'unique:eev_blog_posts',
         ],
         'seo_title' => [
             'string',
@@ -100,6 +103,14 @@ class Post extends Model
         ],
     ];
 
+    public $belongsTo = [
+        'author' => [
+            User::class,
+            'key' => 'user_id',
+            'otherKey' => 'id',
+        ],
+    ];
+
     public function scopeFilterByCategory($query, $value) {
         return $query->whereHas('categories', function ($query) use ($value) {
             $query->where('id', '=', $value);
@@ -111,4 +122,14 @@ class Post extends Model
             $query->where('id', '=', $value);
         });
     }
+
+//    public function beforeSave()
+//    {
+//        if (empty($this->author)) {
+//            $user = BackendAuth::getUser();
+//            if (!is_null($user)) {
+//                $this->user = $user->id;
+//            }
+//        }
+//    }
 }

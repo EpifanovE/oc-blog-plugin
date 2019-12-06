@@ -33,12 +33,6 @@ tabs:
             readOnly: 1
             type: datepicker
             tab: 'eev.blog::lang.advanced'
-        image:
-            label: 'eev.blog::lang.image'
-            mode: image
-            span: auto
-            type: mediafinder
-            tab: 'eev.blog::lang.advanced'
         status:
             label: 'eev.blog::lang.status'
             options:
@@ -48,6 +42,20 @@ tabs:
             showSearch: true
             span: auto
             type: dropdown
+            tab: 'eev.blog::lang.advanced'
+        author:
+            label: 'eev.blog::lang.author'
+            nameFrom: admin_name_email
+            descriptionFrom: description
+            span: auto
+            type: relation
+            tab: 'eev.blog::lang.advanced'
+            placeholder: eev.blog::lang.select-user
+        image:
+            label: 'eev.blog::lang.image'
+            mode: image
+            span: auto
+            type: mediafinder
             tab: 'eev.blog::lang.advanced'
         slug:
             label: 'eev.blog::lang.slug'

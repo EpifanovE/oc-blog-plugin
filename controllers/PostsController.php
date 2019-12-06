@@ -23,4 +23,9 @@ class PostsController extends Controller
         BackendMenu::setContext('EEV.Blog', 'blog', 'posts');
     }
 
+    public function formBeforeCreate($model)
+    {
+        $model->user_id = $this->user->id;
+    }
+
 }
