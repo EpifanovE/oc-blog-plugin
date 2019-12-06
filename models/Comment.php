@@ -2,7 +2,6 @@
 
 use Model;
 use October\Rain\Auth\Models\User;
-use Backend\Models\User as AdminUser;
 use October\Rain\Database\Traits\NestedTree;
 use October\Rain\Database\Traits\SoftDelete;
 use October\Rain\Database\Traits\Validation;
@@ -29,10 +28,6 @@ class Comment extends Model
             'integer',
             'nullable',
         ],
-        'admin_id' => [
-            'integer',
-            'nullable',
-        ],
         'is_moderated' => [
             'boolean',
         ],
@@ -51,11 +46,6 @@ class Comment extends Model
         'user' => [
             User::class,
             'key' => 'user_id',
-            'otherKey' => 'id',
-        ],
-        'admin' => [
-            AdminUser::class,
-            'key' => 'admin_id',
             'otherKey' => 'id',
         ],
     ];

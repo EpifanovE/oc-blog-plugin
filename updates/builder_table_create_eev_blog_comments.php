@@ -14,7 +14,6 @@ class BuilderTableCreateEevBlogComments extends Migration
             $table->integer('post_id')->nullable()->unsigned();
             $table->boolean('is_moderated')->nullable()->default(false);
             $table->integer('user_id')->nullable()->unsigned();
-            $table->integer('admin_id')->nullable()->unsigned();
             $table->integer('parent_id')->nullable();
             $table->integer('nest_left')->nullable();
             $table->integer('nest_right')->nullable();

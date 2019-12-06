@@ -14,14 +14,6 @@ tabs:
             type: relation
             tab: 'eev.blog::lang.general-params'
             placeholder: 'eev.blog::lang.select-user'
-        admin:
-            label: 'eev.blog::lang.admin'
-            nameFrom: admin_name_email
-            descriptionFrom: description
-            span: auto
-            type: relation
-            tab: 'eev.blog::lang.general-params'
-            placeholder: 'eev.blog::lang.select-admin'
         post:
             label: 'eev.blog::lang.post'
             nameFrom: title
