@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="row">
+            {% for post in __SELF__.posts() %}
+            <div class="col-12 col-md-6">
+                <div class="card">
+                    <div class="card-content">
+                        <h2>{{ post.title }}</h2>
+                        {% if post.preview %}
+                        <div>
+                            {{ post.preview }}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+    </div>
+</div>
