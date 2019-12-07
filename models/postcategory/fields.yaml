@@ -15,7 +15,7 @@ tabs:
             label: 'eev.blog::lang.preview'
             size: small
             span: full
-            type: richeditor
+            type: textarea
             tab: 'eev.blog::lang.general-params'
         created_at:
             label: 'eev.blog::lang.created_at'

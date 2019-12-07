@@ -13,7 +13,7 @@ class BuilderTableCreateEevBlogPosts extends Migration
             $table->increments('id')->unsigned();
             $table->string('title', 1024)->nullable();
             $table->text('content')->nullable();
-            $table->text('preview')->nullable();
+            $table->string('preview', 1024)->nullable();
             $table->string('slug', 1024)->nullable();
             $table->string('image', 1024)->nullable();
             $table->string('status', 16)->nullable();

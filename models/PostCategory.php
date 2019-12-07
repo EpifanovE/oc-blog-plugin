@@ -30,7 +30,7 @@ class PostCategory extends Model
         'preview' => [
             'string',
             'nullable',
-            'max:65535',
+            'max:1024',
         ],
         'image' => [
             'image',
