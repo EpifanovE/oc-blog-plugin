@@ -39,8 +39,7 @@ class Post extends Model
             'max:65535',
         ],
         'image' => [
-            'image',
-            'mimes:jpeg,png,gif,webp'
+            'string',
         ],
         'status' => [
             'in:active,draft,disabled'
@@ -98,8 +97,8 @@ class Post extends Model
     public $hasMany = [
         'comments' => [
             Comment::class,
-            'key'      => 'id',
-            'otherKey' => 'post_id',
+            'key'      => 'post_id',
+            'otherKey' => 'id',
         ],
     ];
 

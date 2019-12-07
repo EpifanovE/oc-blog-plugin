@@ -1,10 +1,12 @@
 <?php namespace EEV\Blog\Models;
 
+use Flash;
 use Model;
 use October\Rain\Auth\Models\User;
 use October\Rain\Database\Traits\NestedTree;
 use October\Rain\Database\Traits\SoftDelete;
 use October\Rain\Database\Traits\Validation;
+use October\Rain\Exception\ValidationException;
 
 class Comment extends Model
 {
@@ -20,20 +22,16 @@ class Comment extends Model
             'string',
             'max:65535'
         ],
-        'post_id' => [
-            'required',
-            'integer',
-        ],
-        'user_id' => [
-            'integer',
-            'nullable',
-        ],
+//        'post_id' => [
+//            'required',
+//            'integer',
+//        ],
+//        'user_id' => [
+//            'required',
+//            'integer',
+//        ],
         'is_moderated' => [
             'boolean',
-        ],
-        'parent_id' => [
-            'nullable',
-            'integer',
         ],
     ];
 
@@ -52,5 +50,19 @@ class Comment extends Model
 
     public function getTitleAttribute() {
         return $this->id . ' - '. $this->post->title . ' - ' . $this->user->nameWithEmail;
+    }
+
+    public function beforeSave()
+    {
+//        $this->checkParent();
+    }
+
+    private function checkParent() {
+        if (!empty($this->parent_id)) {
+            $parent = Comment::find($this->parent_id);
+            if ($parent->post->id !== $this->post->id) {
+                throw new ValidationException(['post_id' => 'Invalid parent']);
+            }
+        }
     }
 }

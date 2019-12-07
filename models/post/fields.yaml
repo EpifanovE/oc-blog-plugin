@@ -82,16 +82,17 @@ tabs:
             comment: 'eev.blog::lang.in_tag_keywords'
             tab: 'eev.blog::lang.seo'
         categories:
-            label: 'eev.blog::lang.categories'
-            nameFrom: title
-            descriptionFrom: preview
-            span: full
-            type: relation
+            label: eev.blog::lang.categories
             tab: 'eev.blog::lang.categories'
+            type: partial
+            path: $/eev/blog/controllers/postscontroller/_categories.htm
         tags:
-            label: 'eev.blog::lang.tags'
-            nameFrom: title
-            descriptionFrom: content
-            span: full
-            type: relation
+            label: eev.blog::lang.tags
             tab: 'eev.blog::lang.tags'
+            type: partial
+            path: $/eev/blog/controllers/postscontroller/_tags.htm
+        comments:
+            label: eev.blog::lang.comments
+            tab: 'eev.blog::lang.comments'
+            type: partial
+            path: $/eev/blog/controllers/postscontroller/_comments.htm

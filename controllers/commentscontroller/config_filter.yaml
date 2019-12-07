@@ -6,9 +6,9 @@ scopes:
 
   authors:
     label: 'eev.blog::lang.user'
-    modelClass: Backend\Models\User
+    modelClass: October\Rain\Auth\Models\User
     conditions: user_id in (:filtered)
-    nameFrom: nameWithEmail
+    nameFrom: userNameEmail
 
   posts:
     label: 'eev.blog::lang.posts'

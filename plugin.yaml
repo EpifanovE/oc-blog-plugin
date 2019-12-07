@@ -48,5 +48,6 @@ navigation:
                 label: 'eev.blog::lang.comments'
                 url: eev/blog/commentscontroller
                 icon: icon-comments-o
+                counter: EEV\Blog\Classes\CommentsCounter::count
                 permissions:
                     - eev.blog.comments

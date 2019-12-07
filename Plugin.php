@@ -16,7 +16,7 @@ class Plugin extends PluginBase
 
         User::extend(function($model) {
             $model->addDynamicMethod('getUserNameEmailAttribute', function() use ($model) {
-                return $model->name . ' - ' . $model->email;;
+                return $model->name . ' - ' . $model->email;
             });
         });
 

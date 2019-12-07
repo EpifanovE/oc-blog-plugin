@@ -11,9 +11,9 @@ tabs:
             nameFrom: user_name_email
             descriptionFrom: description
             span: auto
+            readOnly: 1
             type: relation
             tab: 'eev.blog::lang.general-params'
-            placeholder: 'eev.blog::lang.select-user'
         post:
             label: 'eev.blog::lang.post'
             nameFrom: title
@@ -21,7 +21,8 @@ tabs:
             span: auto
             type: relation
             tab: 'eev.blog::lang.general-params'
-            placeholder: 'eev.blog::lang.select-post'
+            disabled: 1
+            readOnly: 1
         is_moderated:
             label: 'eev.blog::lang.is_moderated'
             span: auto

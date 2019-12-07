@@ -1,0 +1,24 @@
+categories:
+  label: eev.blog::lang.categories
+  view:
+    list: $/eev/blog/models/postcategory/columns.yaml
+  manage:
+    list: $/eev/blog/models/postcategory/columns.yaml
+    form: $/eev/blog/models/postcategory/fields.yaml
+
+tags:
+  label: eev.blog::lang.tags
+  view:
+    list: $/eev/blog/models/posttag/columns.yaml
+  manage:
+    list: $/eev/blog/models/posttag/columns.yaml
+    form: $/eev/blog/models/posttag/fields.yaml
+
+comments:
+  label: eev.blog::lang.comments
+  manage:
+    form: $/eev/blog/models/comment/fields.yaml
+    list: $/eev/blog/models/comment/columns.yaml
+  view:
+    list: $/eev/blog/models/comment/columns.yaml
+    toolbarButtons: delete
