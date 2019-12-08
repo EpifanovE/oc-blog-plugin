@@ -9,11 +9,6 @@ columns:
         type: text
         searchable: true
         sortable: true
-    preview:
-        label: 'eev.blog::lang.preview'
-        type: text
-        searchable: true
-        sortable: true
     created_at:
         label: 'eev.blog::lang.created_at'
         type: datetime

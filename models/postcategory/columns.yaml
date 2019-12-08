@@ -5,9 +5,6 @@ columns:
     title:
         label: 'eev.blog::lang.title'
         type: text
-    preview:
-        label: 'eev.blog::lang.preview'
-        type: text
     created_at:
         label: 'eev.blog::lang.created_at'
         type: datetime
