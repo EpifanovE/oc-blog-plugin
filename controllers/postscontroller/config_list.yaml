@@ -1,4 +1,4 @@
-title: PostsController
+title: eev.blog::lang.posts
 modelClass: EEV\Blog\Models\Post
 list: $/eev/blog/models/post/columns.yaml
 recordUrl: 'eev/blog/postscontroller/update/:id'

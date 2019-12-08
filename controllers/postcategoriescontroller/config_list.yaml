@@ -1,4 +1,4 @@
-title: PostCategoriesController
+title: eev.blog::lang.categories
 modelClass: EEV\Blog\Models\PostCategory
 list: $/eev/blog/models/postcategory/columns.yaml
 recordUrl: 'eev/blog/postcategoriescontroller/update/:id'
