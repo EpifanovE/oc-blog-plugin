@@ -6,9 +6,12 @@ create:
     title: 'eev.blog::lang.creating'
     redirect: 'eev/blog/commentscontroller/update/:id'
     redirectClose: eev/blog/commentscontroller
+    flashSave: eev.blog::lang.record_has_been_saved
 update:
     title: 'eev.blog::lang.updating'
     redirect: eev/blog/commentscontroller
     redirectClose: eev/blog/commentscontroller
+    flashSave: eev.blog::lang.record_has_been_saved
+    flashDelete: eev.blog::lang.record_has_been_deleted
 preview:
     title: 'eev.blog::lang.preview'

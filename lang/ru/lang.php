@@ -52,4 +52,6 @@
     'select-post' => 'Выберите запись',
     'admin' => 'Администратор',
     'author' => 'Автор',
+    'record_has_been_saved' => 'Запись сохранена',
+    'record_has_been_deleted' => 'Запись удалена',
 ];
