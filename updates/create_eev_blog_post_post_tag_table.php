@@ -3,7 +3,7 @@
 use Schema;
 use October\Rain\Database\Updates\Migration;
 
-class BuilderTableCreateEevBlogPostPostTag extends Migration
+class CreateEevBlogPostPostTagTable extends Migration
 {
     public function up()
     {

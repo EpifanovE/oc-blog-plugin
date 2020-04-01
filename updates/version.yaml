@@ -1,8 +1,8 @@
-1.0.1:
+1.0.0:
     - 'Initialize plugin.'
-    - builder_table_create_eev_blog_posts.php
-    - builder_table_create_eev_blog_comments.php
-    - builder_table_create_eev_blog_post_categories.php
-    - builder_table_create_eev_blog_post_post_category.php
-    - builder_table_create_eev_blog_post_tag.php
-    - builder_table_create_eev_blog_post_post_tag.php
+    - create_eev_blog_posts_table.php
+    - create_eev_blog_post_categories_table.php
+    - create_eev_blog_post_post_category_table.php
+    - create_eev_blog_post_tag_table.php
+    - create_eev_blog_post_post_tag_table.php
+    - DatabaseSeeder.php

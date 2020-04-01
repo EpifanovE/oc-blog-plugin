@@ -1,5 +1,0 @@
-title: 'eev.blog::lang.sorting'
-modelClass: EEV\Blog\Models\Comment
-nameFrom: title
-toolbar:
-    buttons: reorder_toolbar

@@ -91,8 +91,3 @@ tabs:
             tab: 'eev.blog::lang.tags'
             type: partial
             path: $/eev/blog/controllers/postscontroller/_tags.htm
-        comments:
-            label: eev.blog::lang.comments
-            tab: 'eev.blog::lang.comments'
-            type: partial
-            path: $/eev/blog/controllers/postscontroller/_comments.htm

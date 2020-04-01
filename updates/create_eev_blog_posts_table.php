@@ -3,7 +3,7 @@
 use Schema;
 use October\Rain\Database\Updates\Migration;
 
-class BuilderTableCreateEevBlogPosts extends Migration
+class CreateEevBlogPostsTable extends Migration
 {
     public function up()
     {
@@ -17,7 +17,7 @@ class BuilderTableCreateEevBlogPosts extends Migration
             $table->string('slug', 1024)->nullable();
             $table->string('image', 1024)->nullable();
             $table->string('status', 16)->nullable();
-            $table->integer('user_id')->unsigned();
+            $table->integer('user_id')->unsigned()->nullable();
             $table->string('seo_title', 1024)->nullable();
             $table->string('seo_description', 2048)->nullable();
             $table->string('seo_keywords', 1024)->nullable();

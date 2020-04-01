@@ -17,9 +17,6 @@ permissions:
     eev.blog.tags:
         tab: 'eev.blog::lang.blog'
         label: 'eev.blog::lang.post-tags'
-    eev.blog.comments:
-        tab: 'eev.blog::lang.blog'
-        label: 'eev.blog::lang.comments'
 navigation:
     blog:
         label: 'eev.blog::lang.blog'
@@ -44,10 +41,3 @@ navigation:
                 icon: icon-tags
                 permissions:
                     - eev.blog.tags
-            comments:
-                label: 'eev.blog::lang.comments'
-                url: eev/blog/commentscontroller
-                icon: icon-comments-o
-                counter: EEV\Blog\Classes\CommentsCounter::count
-                permissions:
-                    - eev.blog.comments

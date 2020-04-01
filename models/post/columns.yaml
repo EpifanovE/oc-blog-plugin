@@ -12,8 +12,10 @@ columns:
     created_at:
         label: 'eev.blog::lang.created_at'
         type: datetime
+        format: H:i d-m-Y
         sortable: true
     updated_at:
         label: 'eev.blog::lang.updated_at'
         type: datetime
+        format: H:i d-m-Y
         sortable: true

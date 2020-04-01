@@ -1,8 +1,0 @@
-<?php Block::put('breadcrumb') ?>
-    <ul>
-        <li><a href="<?= Backend::url('eev/blog/commentscontroller') ?>"><?= e(trans('eev.blog::lang.comments')) ?></a></li>
-        <li><?= e($this->pageTitle) ?></li>
-    </ul>
-<?php Block::endPut() ?>
-
-<?= $this->reorderRender() ?>
