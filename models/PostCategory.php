@@ -37,7 +37,7 @@ class PostCategory extends Model
             'mimes:jpeg,png,gif,webp'
         ],
         'status' => [
-            'in:active,draft,disabled'
+            'in:published,draft,disabled'
         ],
         'slug' => [
             'string',

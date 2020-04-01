@@ -3,12 +3,15 @@
 use Backend\Models\User;
 use BackendAuth;
 use Model;
+use October\Rain\Database\Relations\BelongsToMany;
 use October\Rain\Database\Traits\Sluggable;
 use October\Rain\Database\Traits\SoftDelete;
 use October\Rain\Database\Traits\Validation;
 
 /**
  * Model
+ *
+ * @method BelongsToMany categories
  */
 class Post extends Model
 {
@@ -42,7 +45,7 @@ class Post extends Model
             'string',
         ],
         'status' => [
-            'in:active,draft,disabled'
+            'in:published,draft,disabled'
         ],
         'slug' => [
             'string',
