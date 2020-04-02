@@ -5,4 +5,5 @@
     - create_eev_blog_post_post_category_table.php
     - create_eev_blog_post_tag_table.php
     - create_eev_blog_post_post_tag_table.php
+    - create_eev_blog_comments_table.php
     - DatabaseSeeder.php

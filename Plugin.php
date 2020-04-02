@@ -8,6 +8,8 @@ use System\Classes\PluginBase;
 
 class Plugin extends PluginBase
 {
+    public $require = ['RainLab.User'];
+
     public function boot()
     {
         Admin::extend(function($model) {

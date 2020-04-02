@@ -98,6 +98,14 @@ class Post extends Model
         ]
     ];
 
+    public $hasMany = [
+        'comments' => [
+            Comment::class,
+            'key'      => 'post_id',
+            'otherKey' => 'id',
+        ],
+    ];
+
     public $belongsTo = [
         'author' => [
             User::class,
