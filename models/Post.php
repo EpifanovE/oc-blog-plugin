@@ -2,6 +2,7 @@
 
 use Backend\Models\User;
 use BackendAuth;
+use EEV\Blog\Classes\Status;
 use Lang;
 use Model;
 use October\Rain\Database\Relations\BelongsToMany;
@@ -114,6 +115,10 @@ class Post extends Model
         ],
     ];
 
+    public function isActive() {
+        return $this->status === Status::PUBLISHED;
+    }
+
     public function scopeFilterByCategory($query, $value) {
         return $query->whereHas('categories', function ($query) use ($value) {
             $query->where('id', '=', $value);
@@ -124,6 +129,10 @@ class Post extends Model
         return $query->whereHas('tags', function ($query) use ($value) {
             $query->where('id', '=', $value);
         });
+    }
+
+    public function scopeActive($query) {
+        return $query->where('status', Status::PUBLISHED);
     }
 
     public function beforeSave()
