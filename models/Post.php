@@ -2,6 +2,7 @@
 
 use Backend\Models\User;
 use BackendAuth;
+use Cms\Classes\Controller;
 use EEV\Blog\Classes\Status;
 use Lang;
 use Model;
@@ -115,6 +116,22 @@ class Post extends Model
         ],
     ];
 
+    /**
+     * The attributes on which the post list can be ordered.
+     * @var array
+     */
+    public static $allowedSortingOptions = [
+        'title asc'         => 'rainlab.blog::lang.sorting.title_asc',
+        'title desc'        => 'rainlab.blog::lang.sorting.title_desc',
+        'created_at asc'    => 'rainlab.blog::lang.sorting.created_asc',
+        'created_at desc'   => 'rainlab.blog::lang.sorting.created_desc',
+        'updated_at asc'    => 'rainlab.blog::lang.sorting.updated_asc',
+        'updated_at desc'   => 'rainlab.blog::lang.sorting.updated_desc',
+        'published_at asc'  => 'rainlab.blog::lang.sorting.published_asc',
+//        'published_at desc' => 'rainlab.blog::lang.sorting.published_desc',
+        'random'            => 'rainlab.blog::lang.sorting.random'
+    ];
+
     public function isActive() {
         return $this->status === Status::PUBLISHED;
     }
@@ -129,6 +146,117 @@ class Post extends Model
         return $query->whereHas('tags', function ($query) use ($value) {
             $query->where('id', '=', $value);
         });
+    }
+
+    public function scopeListFrontEnd($query, $options)
+    {
+        /*
+         * Default options
+         */
+        extract(array_merge([
+            'page'             => 1,
+            'perPage'          => 30,
+            'sort'             => 'created_at',
+            'categories'       => null,
+            'exceptCategories' => null,
+            'category'         => null,
+            'search'           => '',
+            'published'        => true,
+            'exceptPost'       => null
+        ], $options));
+
+        $searchableFields = ['title', 'slug', 'excerpt', 'content'];
+
+        if ($published) {
+            $query->isActive();
+        }
+
+        /*
+         * Except post(s)
+         */
+        if ($exceptPost) {
+            $exceptPosts = (is_array($exceptPost)) ? $exceptPost : [$exceptPost];
+            $exceptPostIds = [];
+            $exceptPostSlugs = [];
+
+            foreach ($exceptPosts as $exceptPost) {
+                $exceptPost = trim($exceptPost);
+
+                if (is_numeric($exceptPost)) {
+                    $exceptPostIds[] = $exceptPost;
+                } else {
+                    $exceptPostSlugs[] = $exceptPost;
+                }
+            }
+
+            if (count($exceptPostIds)) {
+                $query->whereNotIn('id', $exceptPostIds);
+            }
+            if (count($exceptPostSlugs)) {
+                $query->whereNotIn('slug', $exceptPostSlugs);
+            }
+        }
+
+        /*
+         * Sorting
+         */
+        if (in_array($sort, array_keys(static::$allowedSortingOptions))) {
+            if ($sort == 'random') {
+                $query->inRandomOrder();
+            } else {
+                @list($sortField, $sortDirection) = explode(' ', $sort);
+
+                if (is_null($sortDirection)) {
+                    $sortDirection = "desc";
+                }
+
+                $query->orderBy($sortField, $sortDirection);
+            }
+        }
+
+        /*
+         * Search
+         */
+        $search = trim($search);
+        if (strlen($search)) {
+            $query->searchWhere($search, $searchableFields);
+        }
+
+        /*
+         * Categories
+         */
+        if ($categories !== null) {
+            $categories = is_array($categories) ? $categories : [$categories];
+            $query->whereHas('categories', function($q) use ($categories) {
+                $q->whereIn('id', $categories);
+            });
+        }
+
+        /*
+         * Except Categories
+         */
+        if (!empty($exceptCategories)) {
+            $exceptCategories = is_array($exceptCategories) ? $exceptCategories : [$exceptCategories];
+            array_walk($exceptCategories, 'trim');
+
+            $query->whereDoesntHave('categories', function ($q) use ($exceptCategories) {
+                $q->whereIn('slug', $exceptCategories);
+            });
+        }
+
+        /*
+         * Category, including children
+         */
+        if ($category !== null) {
+            $category = PostCategory::find($category);
+
+            $categories = $category->getAllChildrenAndSelf()->lists('id');
+            $query->whereHas('categories', function($q) use ($categories) {
+                $q->whereIn('id', $categories);
+            });
+        }
+
+        return $query->paginate($perPage, $page);
     }
 
     public function scopeActive($query) {

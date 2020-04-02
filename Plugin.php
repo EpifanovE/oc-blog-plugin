@@ -1,6 +1,7 @@
 <?php namespace EEV\Blog;
 
 use Backend\Models\User as Admin;
+use EEV\Blog\Components\BlogPost;
 use EEV\Blog\Components\BlogPosts;
 use Event;
 use October\Rain\Auth\Models\User;
@@ -35,6 +36,7 @@ class Plugin extends PluginBase
     {
         return [
             BlogPosts::class => 'blogPosts',
+            BlogPost::class => 'blogPost',
         ];
     }
 

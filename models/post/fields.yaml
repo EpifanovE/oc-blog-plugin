@@ -36,7 +36,7 @@ tabs:
         status:
             label: 'eev.blog::lang.status'
             options:
-                active: 'eev.blog::lang.statuses.active'
+                published: 'eev.blog::lang.statuses.published'
                 draft: 'eev.blog::lang.statuses.draft'
                 disabled: 'eev.blog::lang.statuses.disabled'
             showSearch: true

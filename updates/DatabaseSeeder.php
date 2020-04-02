@@ -54,7 +54,7 @@ class DatabaseSeeder extends Seeder
 
     public function getPostCategory($index = null) {
         return [
-            'title' => $this->faker->realText(20),
+            'title' => str_replace(['?', '-', '.', ',', '—', '!', ':', ';'] , '', $this->faker->realText(20)),
             'content' => $this->faker->realText(2000),
             'preview' => $this->faker->realText(500),
             'slug' => 'category-' . ($index ? $index : ''),
@@ -68,7 +68,7 @@ class DatabaseSeeder extends Seeder
 
     public function getPostTag($index = null) {
         return [
-            'title' => $this->faker->realText(10),
+            'title' => str_replace(['?', '-', '.', ',', '—', '!', ':', ';'] , '', $this->faker->realText(10)),
             'content' => $this->faker->realText(2000),
             'slug' => 'tag-' . ($index ? $index : ''),
         ];
