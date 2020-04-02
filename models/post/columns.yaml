@@ -9,6 +9,11 @@ columns:
         type: text
         searchable: true
         sortable: true
+    status_label:
+        label: 'eev.blog::lang.status'
+        type: partial
+        path: ~/plugins/eev/blog/views/_status.htm
+        sortable: false
     created_at:
         label: 'eev.blog::lang.created_at'
         type: datetime

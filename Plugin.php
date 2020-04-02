@@ -2,6 +2,7 @@
 
 use Backend\Models\User as Admin;
 use EEV\Blog\Components\BlogPosts;
+use Event;
 use October\Rain\Auth\Models\User;
 use System\Classes\PluginBase;
 
@@ -19,6 +20,10 @@ class Plugin extends PluginBase
             $model->addDynamicMethod('getUserNameEmailAttribute', function() use ($model) {
                 return $model->name . ' - ' . $model->email;
             });
+        });
+
+        Event::listen('backend.page.beforeDisplay', function ($controller, $action, $params) {
+            $controller->addCss('/plugins/eev/blog/assets/css/admin.min.css');
         });
 
         parent::boot();

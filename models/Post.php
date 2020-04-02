@@ -2,6 +2,7 @@
 
 use Backend\Models\User;
 use BackendAuth;
+use Lang;
 use Model;
 use October\Rain\Database\Relations\BelongsToMany;
 use October\Rain\Database\Traits\Sluggable;
@@ -125,5 +126,13 @@ class Post extends Model
                 $this->user_id = $user->id;
             }
         }
+    }
+
+    public function getStatusLabelAttribute()
+    {
+        return [
+            'label' => Lang::get('eev.blog::lang.statuses.' . $this->status),
+            'modifier' => $this->status,
+        ];
     }
 }

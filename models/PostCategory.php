@@ -1,5 +1,6 @@
 <?php namespace EEV\Blog\Models;
 
+use Lang;
 use Model;
 use October\Rain\Database\Traits\NestedTree;
 use October\Rain\Database\Traits\Sluggable;
@@ -69,4 +70,12 @@ class PostCategory extends Model
             'otherKey' => 'post_id',
         ]
     ];
+
+    public function getStatusLabelAttribute()
+    {
+        return [
+            'label' => Lang::get('eev.blog::lang.statuses.' . $this->status),
+            'modifier' => $this->status,
+        ];
+    }
 }

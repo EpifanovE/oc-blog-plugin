@@ -5,6 +5,11 @@ columns:
     title:
         label: 'eev.blog::lang.title'
         type: text
+    status_label:
+        label: 'eev.blog::lang.status'
+        type: partial
+        path: ~/plugins/eev/blog/views/_status.htm
+        sortable: false
     created_at:
         label: 'eev.blog::lang.created_at'
         type: datetime

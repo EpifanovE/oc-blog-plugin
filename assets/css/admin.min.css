@@ -1,0 +1,23 @@
+.status {
+padding: 3px 6px;
+border-radius: 3px;
+border: 1px solid transparent;
+}
+
+.status_draft {
+border-color: #333333;
+background-color: #333333;
+color: #fff;
+}
+
+.status_disabled {
+border-color: #c0392b;
+background-color: #c0392b;
+color: #fff;
+}
+
+.status_published {
+border-color: #27ae60;
+background-color: #27ae60;
+color: #fff;
+}

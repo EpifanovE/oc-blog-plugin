@@ -30,9 +30,9 @@
     'is_moderated' => 'Проверен',
     'status' => 'Статус',
     'statuses' => [
-        'active' => 'Активный',
+        'published' => 'Опубликовано',
         'draft' => 'Черновик',
-        'disabled' => 'Отключен',
+        'disabled' => 'Отключено',
     ],
     'creating_post' => 'Создание записи',
     'updating_post' => 'Обновление записи',
