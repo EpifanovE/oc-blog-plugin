@@ -3,5 +3,14 @@
         <div class="col-12 editor-output">
             {{ post.content|raw }}
         </div>
+        <div class="col-12">
+            <ul>
+                {% for category in post.categories %}
+                <li>
+                    <a href="{{ category.url }}">{{ category.title}}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 </div>

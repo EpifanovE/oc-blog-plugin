@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
 
     public function run()
     {
-        for($i = 1; $i < 10; $i++) {
+        for($i = 1; $i <= 10; $i++) {
             PostCategory::create($this->getPostCategory($i));
         }
 
@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
             $post->categories()->attach($this->uniqueRandomNumbersWithinRange(1,10, $categoriesCount));
         }
 
-        for($i = 1; $i < 10; $i++) {
+        for($i = 1; $i <= 10; $i++) {
             PostTag::create($this->getPostTag($i));
         }
     }
@@ -68,7 +68,7 @@ class DatabaseSeeder extends Seeder
 
     public function getPostTag($index = null) {
         return [
-            'title' => str_replace(['?', '-', '.', ',', '—', '!', ':', ';'] , '', $this->faker->realText(10)),
+            'title' => str_replace(['?', '-', '.', ',', '—', '!', ':', ';'] , '', $this->faker->realText(20)),
             'content' => $this->faker->realText(2000),
             'slug' => 'tag-' . ($index ? $index : ''),
         ];

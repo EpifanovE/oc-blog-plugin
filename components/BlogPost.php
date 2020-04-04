@@ -2,6 +2,7 @@
 
 namespace EEV\Blog\Components;
 
+use Backend\Facades\BackendAuth;
 use Cms\Classes\ComponentBase;
 use EEV\Blog\Models\Post;
 use Cms\Classes\Page;
@@ -9,6 +10,11 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class BlogPost extends ComponentBase
 {
+
+    public $post;
+
+    public $categoryPage;
+
     public function componentDetails()
     {
         return [
@@ -42,17 +48,14 @@ class BlogPost extends ComponentBase
 
     public function onRun()
     {
-        $slug = $this->property('slug');
+        $this->categoryPage = $this->page['categoryPage'] = $this->property('categoryPage');
 
-        $post = Post::where('slug', $slug)->active()->first();
-
-        if ( ! $post) {
+        try {
+            $this->post = $this->page['post'] = $this->loadPost();
+        } catch (ModelNotFoundException $e) {
             $this->setStatusCode(404);
-
             return $this->controller->run('404');
         }
-
-        $this->page['post'] = $post;
     }
 
     protected function loadPost()
@@ -60,28 +63,16 @@ class BlogPost extends ComponentBase
         $slug = $this->property('slug');
 
         try {
-            $post = Post::where('slug', $slug)->active()->firstOrFail();
-        } catch (ModelNotFoundException $ex) {
-            $this->setStatusCode(404);
-            return $this->controller->run('404');
+            $postQuery = Post::where('slug', $slug);
+            if (!$this->checkEditor()) {
+                $postQuery->active();
+            }
+
+            $post = $postQuery->firstOrFail();
+        } catch (ModelNotFoundException $e) {
+            throw new ModelNotFoundException('Not Found');
         }
 
-
-        if ( ! $this->checkEditor()) {
-            $post = $post->isPublished();
-        }
-
-        try {
-            $post = $post->firstOrFail();
-        } catch (ModelNotFoundException $ex) {
-            $this->setStatusCode(404);
-
-            return $this->controller->run('404');
-        }
-
-        /*
-         * Add a "url" helper attribute for linking to each category
-         */
         if ($post && $post->categories->count()) {
             $post->categories->each(function ($category) {
                 $category->setUrl($this->categoryPage, $this->controller);

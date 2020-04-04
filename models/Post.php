@@ -3,7 +3,10 @@
 use Backend\Models\User;
 use BackendAuth;
 use Cms\Classes\Controller;
+use Cms\Classes\Page as CmsPage;
+use Cms\Classes\Theme;
 use EEV\Blog\Classes\Status;
+use Illuminate\Support\Facades\URL;
 use Lang;
 use Model;
 use October\Rain\Database\Relations\BelongsToMany;
@@ -116,21 +119,103 @@ class Post extends Model
         ],
     ];
 
-    /**
-     * The attributes on which the post list can be ordered.
-     * @var array
-     */
     public static $allowedSortingOptions = [
+        'id asc'         => 'ID ASC',
+        'id desc'        => 'ID DESC',
         'title asc'         => 'rainlab.blog::lang.sorting.title_asc',
         'title desc'        => 'rainlab.blog::lang.sorting.title_desc',
         'created_at asc'    => 'rainlab.blog::lang.sorting.created_asc',
         'created_at desc'   => 'rainlab.blog::lang.sorting.created_desc',
         'updated_at asc'    => 'rainlab.blog::lang.sorting.updated_asc',
         'updated_at desc'   => 'rainlab.blog::lang.sorting.updated_desc',
-        'published_at asc'  => 'rainlab.blog::lang.sorting.published_asc',
+//        'published_at asc'  => 'rainlab.blog::lang.sorting.published_asc',
 //        'published_at desc' => 'rainlab.blog::lang.sorting.published_desc',
         'random'            => 'rainlab.blog::lang.sorting.random'
     ];
+
+    public static function getMenuTypeInfo($type)
+    {
+        $result = [];
+
+        if ($type == 'blog-post') {
+            $references = [];
+
+            $posts = self::orderBy('title')->get();
+            foreach ($posts as $post) {
+                $references[$post->id] = $post->title;
+            }
+
+            $result = [
+                'references'   => $references,
+                'nesting'      => false,
+                'dynamicItems' => false
+            ];
+        }
+
+        if ($type == 'blog') {
+            $result = [
+                'dynamicItems' => true
+            ];
+        }
+
+        if ($result) {
+            $theme = Theme::getActiveTheme();
+
+            $pages = CmsPage::listInTheme($theme, true);
+            $cmsPages = [];
+
+            foreach ($pages as $page) {
+                if (!$page->hasComponent('blogPost')) {
+                    continue;
+                }
+
+                /*
+                 * Component must use a categoryPage filter with a routing parameter and post slug
+                 * eg: categoryPage = "{{ :somevalue }}", slug = "{{ :somevalue }}"
+                 */
+                $properties = $page->getComponentProperties('blogPost');
+                if (!isset($properties['categoryPage']) || !preg_match('/{{\s*:/', $properties['slug'])) {
+                    continue;
+                }
+
+                $cmsPages[] = $page;
+            }
+
+            $result['cmsPages'] = $cmsPages;
+        }
+
+        return $result;
+    }
+
+    public static function resolveMenuItem($item, $url, $theme)
+    {
+        $result = null;
+
+        if ($item->type == 'blog-post') {
+            if (!$item->reference || !$item->cmsPage) {
+                return;
+            }
+
+            $category = self::find($item->reference);
+            if (!$category) {
+                return;
+            }
+
+            $pageUrl = self::getPostPageUrl($item->cmsPage, $category, $theme);
+            if (!$pageUrl) {
+                return;
+            }
+
+            $pageUrl = Url::to($pageUrl);
+
+            $result = [];
+            $result['url'] = $pageUrl;
+            $result['isActive'] = $pageUrl == $url;
+            $result['mtime'] = $category->updated_at;
+        }
+
+        return $result;
+    }
 
     public function isActive() {
         return $this->status === Status::PUBLISHED;
@@ -150,12 +235,18 @@ class Post extends Model
 
     public function scopeListFrontEnd($query, $options)
     {
-        /*
-         * Default options
+        /**
+         * @var $published
+         * @var $exceptPost
+         * @var $sort
+         * @var $search
+         * @var $categories
+         * @var $category
+         * @var $perPage
+         * @var $page
          */
         extract(array_merge([
-            'page'             => 1,
-            'perPage'          => 30,
+            'perPage'          => 10,
             'sort'             => 'created_at',
             'categories'       => null,
             'exceptCategories' => null,
@@ -168,12 +259,9 @@ class Post extends Model
         $searchableFields = ['title', 'slug', 'excerpt', 'content'];
 
         if ($published) {
-            $query->isActive();
+            $query->active();
         }
 
-        /*
-         * Except post(s)
-         */
         if ($exceptPost) {
             $exceptPosts = (is_array($exceptPost)) ? $exceptPost : [$exceptPost];
             $exceptPostIds = [];
@@ -256,11 +344,18 @@ class Post extends Model
             });
         }
 
-        return $query->paginate($perPage, $page);
+        return $query->paginate($perPage);
     }
 
     public function scopeActive($query) {
         return $query->where('status', Status::PUBLISHED);
+    }
+
+    public function scopeFilterCategories($query, $categories)
+    {
+        return $query->whereHas('categories', function($q) use ($categories) {
+            $q->whereIn('id', $categories);
+        });
     }
 
     public function beforeSave()
@@ -273,11 +368,47 @@ class Post extends Model
         }
     }
 
+    public function setUrl($pageName, $controller)
+    {
+        $params = [
+            'id'   => $this->id,
+            'slug' => $this->slug
+        ];
+
+        return $this->url = $controller->pageUrl($pageName, $params);
+    }
+
     public function getStatusLabelAttribute()
     {
         return [
             'label' => Lang::get('eev.blog::lang.statuses.' . $this->status),
             'modifier' => $this->status,
         ];
+    }
+
+    protected static function getPostPageUrl($pageCode, $post, $theme)
+    {
+        $page = CmsPage::loadCached($theme, $pageCode);
+
+        if (!$page) {
+            return;
+        }
+
+        $properties = $page->getComponentProperties('blogPost');
+        if (!isset($properties['slug'])) {
+            return;
+        }
+
+        if (!preg_match('/^\{\{([^\}]+)\}\}$/', $properties['slug'], $matches)) {
+            return;
+        }
+
+        $paramName = substr(trim($matches[1]), 1);
+        $params = [
+            $paramName => $post->slug,
+        ];
+        $url = CmsPage::url($page->getBaseFileName(), $params);
+
+        return $url;
     }
 }
