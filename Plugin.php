@@ -51,6 +51,11 @@ class Plugin extends PluginBase
             });
         });
 
+        Event::listen('cms.page.beforeDisplay', function ($controller, $action, $params) {
+            $controller->addCss('/plugins/eev/blog/assets/css/styles.min.css');
+//            $controller->addJs('/plugins/eev/blog/assets/js/scripts.min.js');
+        });
+
         Event::listen('backend.page.beforeDisplay', function ($controller, $action, $params) {
             $controller->addCss('/plugins/eev/blog/assets/css/admin.min.css');
         });

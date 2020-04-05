@@ -1,0 +1,19 @@
+{% if post.categories %}
+    <div class="col-12">
+        <div class="blog-categories blog-post__categories">
+            <i class="far fa-folder blog-categories__icon"></i>
+            <ul class="blog-categories__items">
+                {% for category in post.categories %}
+                    <li class="blog-categories__item">
+                        <a href="{{ category.url }}" class="blog-categories__link">
+                            {{ category.title }}
+                        </a>
+                        {% if not loop.last %}
+                        <span class="blog-categories__separator">/</span>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endif %}

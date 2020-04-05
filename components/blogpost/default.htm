@@ -1,16 +1,7 @@
 <div class="blog-post">
-    <div class="row">
-        <div class="col-12 editor-output">
-            {{ post.content|raw }}
+    {% for row in config.layout %}
+        <div class="row blog-post__row">
+            {% partial '@' ~ row %}
         </div>
-        <div class="col-12">
-            <ul>
-                {% for category in post.categories %}
-                <li>
-                    <a href="{{ category.url }}">{{ category.title}}</a>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
-    </div>
+    {% endfor %}
 </div>

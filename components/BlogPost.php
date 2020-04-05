@@ -50,6 +50,12 @@ class BlogPost extends ComponentBase
     {
         $this->categoryPage = $this->page['categoryPage'] = $this->property('categoryPage');
 
+        $config = [
+            'layout' => config('eev.blog::post.layout'),
+        ];
+
+        $this->page['config'] = $config;
+
         try {
             $this->post = $this->page['post'] = $this->loadPost();
         } catch (ModelNotFoundException $e) {
