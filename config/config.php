@@ -15,9 +15,9 @@ return [
             'comments',
         ],
         'meta' => [
-            'meta-date',
-            'meta-author',
-            'meta-comments',
+            'date',
+            'author',
+            'comments',
         ],
     ],
 ];

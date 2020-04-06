@@ -2,7 +2,7 @@
     <div class="blog-meta">
         {% for meta in config.meta %}
         <div class="blog-meta__item">
-            {% partial '@' ~ meta %}
+            {% partial '@' ~ 'meta/' ~ meta %}
         </div>
         {% endfor %}
     </div>
