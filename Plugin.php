@@ -40,6 +40,12 @@ class Plugin extends PluginBase
         });
 
         Admin::extend(function ($model) {
+            $model->addDynamicMethod('getDisplayNameAttribute', function () use ($model) {
+                return $model->first_name . ' - ' . $model->last_name;
+            });
+        });
+
+        Admin::extend(function ($model) {
             $model->addDynamicMethod('getAdminNameEmailAttribute', function () use ($model) {
                 return $model->getFullNameAttribute() . ' - ' . $model->email;;
             });

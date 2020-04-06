@@ -59,4 +59,13 @@ class PostTag extends Model
             'otherKey' => 'post_id',
         ]
     ];
+
+    public function setUrl($pageName, $controller)
+    {
+        $params = [
+            'slug' => $this->slug,
+        ];
+
+        return $this->url = $controller->pageUrl($pageName, $params, false);
+    }
 }

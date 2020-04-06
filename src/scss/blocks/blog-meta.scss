@@ -1,0 +1,11 @@
+.blog-meta {
+  display: flex;
+
+  &__item {
+    margin-right: 1rem;
+  }
+
+  &__icon {
+    margin-right: .5rem;
+  }
+}

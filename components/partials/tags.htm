@@ -1,0 +1,19 @@
+{% if post.tags.count %}
+    <div class="col-12">
+        <div class="blog-tags blog-post__tags">
+            <i class="fas fa-tags blog-tags__icon"></i>
+            <ul class="blog-tags__items">
+                {% for tag in post.tags %}
+                    <li class="blog-tags__item">
+                        <a href="{{ tag.url }}" class="blog-tags__link">
+                            {{ tag.title }}
+                        </a>
+                        {% if not loop.last %}
+                            <span class="blog-tags__separator">/</span>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endif %}

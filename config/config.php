@@ -8,15 +8,16 @@ return [
     'post' => [ // content, thumb, meta (date, author, comments), comments, categories, tags
         'layout' => [
             'thumb',
-//            'meta' => [
-//                'date',
-//                'author',
-//                'comments',
-//            ],
+            'meta',
             'content',
             'categories',
             'tags',
             'comments',
+        ],
+        'meta' => [
+            'meta-date',
+            'meta-author',
+            'meta-comments',
         ],
     ],
 ];

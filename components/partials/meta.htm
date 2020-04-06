@@ -1,0 +1,9 @@
+<div class="col-12">
+    <div class="blog-meta">
+        {% for meta in config.meta %}
+        <div class="blog-meta__item">
+            {% partial '@' ~ meta %}
+        </div>
+        {% endfor %}
+    </div>
+</div>

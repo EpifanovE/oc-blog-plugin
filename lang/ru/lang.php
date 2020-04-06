@@ -53,6 +53,9 @@
     'author' => 'Автор',
     'record_has_been_saved' => 'Запись сохранена',
     'record_has_been_deleted' => 'Запись удалена',
+    'category_page' => 'Страница категории',
+    'tag_page' => 'Страница тега',
+    'post_slug' => 'Псевдоним поста (slug)',
     'settings' => [
         'settings' => 'Настройки',
         'category_title' => 'Список категорий блога',

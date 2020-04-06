@@ -15,10 +15,12 @@ class BlogPost extends ComponentBase
 
     public $categoryPage;
 
+    public $tagPage;
+
     public function componentDetails()
     {
         return [
-            'name'        => 'Blog Post',
+            'name' => 'Blog Post',
             'description' => 'Displays a blog post.'
         ];
     }
@@ -26,17 +28,23 @@ class BlogPost extends ComponentBase
     public function defineProperties()
     {
         return [
-            'slug'         => [
-                'title'       => 'eev.blog::lang.post_slug',
+            'slug' => [
+                'title' => 'eev.blog::lang.post_slug',
                 'description' => 'eev.blog::lang.post_slug_description',
-                'default'     => '{{ :slug }}',
-                'type'        => 'string',
+                'default' => '{{ :slug }}',
+                'type' => 'string',
             ],
             'categoryPage' => [
-                'title'       => 'eev.blog::lang.post_category',
-                'description' => 'eev.blog::lang.post_category_description',
-                'type'        => 'dropdown',
-                'default'     => 'blog/category',
+                'title' => 'eev.blog::lang.category_page',
+                'description' => '',
+                'type' => 'dropdown',
+                'default' => 'blog/category',
+            ],
+            'tagPage' => [
+                'title' => 'eev.blog::lang.tag_page',
+                'description' => '',
+                'type' => 'dropdown',
+                'default' => 'blog/category',
             ],
         ];
     }
@@ -46,13 +54,17 @@ class BlogPost extends ComponentBase
         return Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
     }
 
+    public function getTagPageOptions()
+    {
+        return Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
+    }
+
     public function onRun()
     {
         $this->categoryPage = $this->page['categoryPage'] = $this->property('categoryPage');
+        $this->tagPage = $this->page['tagPage'] = $this->property('tagPage');
 
-        $config = [
-            'layout' => config('eev.blog::post.layout'),
-        ];
+        $config = config('eev.blog::post');
 
         $this->page['config'] = $config;
 
@@ -70,8 +82,13 @@ class BlogPost extends ComponentBase
 
         try {
             $postQuery = Post::where('slug', $slug);
+
             if (!$this->checkEditor()) {
-                $postQuery->active();
+                $postQuery
+                    ->active()
+                    ->with(['categories' => function ($q) {
+                        $q->active();
+                    }]);
             }
 
             $post = $postQuery->firstOrFail();
@@ -82,6 +99,12 @@ class BlogPost extends ComponentBase
         if ($post && $post->categories->count()) {
             $post->categories->each(function ($category) {
                 $category->setUrl($this->categoryPage, $this->controller);
+            });
+        }
+
+        if ($post && $post->tags->count()) {
+            $post->tags->each(function ($tag) {
+                $tag->setUrl($this->tagPage, $this->controller);
             });
         }
 
